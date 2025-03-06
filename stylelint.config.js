@@ -1,3 +1,3 @@
 export default {
-  extends: ['stylelint-config-standard', 'stylelint-config-standard-vue/scss', 'stylelint-config-standard-scss']
+  extends: ['stylelint-config-standard', 'stylelint-config-standard-scss', 'stylelint-config-standard-vue/scss']
 }

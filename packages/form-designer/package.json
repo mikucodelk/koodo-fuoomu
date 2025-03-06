@@ -1,0 +1,10 @@
+{
+  "name": "@koodo-fuoomu/form-designer",
+  "type": "module",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/kfc-form-designer.js",
+  "scripts": {
+    "build": "vite build"
+  }
+}

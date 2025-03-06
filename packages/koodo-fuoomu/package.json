@@ -1,0 +1,12 @@
+{
+  "name": "koodo-fuoomu",
+  "type": "module",
+  "version": "0.0.0",
+  "main": "./dist/koodo-fuoomu.js",
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@koodo-fuoomu/form-designer": "workspace:^"
+  }
+}
