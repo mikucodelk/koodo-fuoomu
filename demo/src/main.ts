@@ -1,8 +1,12 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import KoodoFuoomu from 'koodo-fuoomu'
+import KfcFormDesigner from '@koodo-fuoomu/form-designer'
+import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
 
+import App from './App.vue'
+
 const app = createApp(App)
-app.use(KoodoFuoomu)
+
+app.use(KfcFormDesigner)
+
 app.mount('#app')

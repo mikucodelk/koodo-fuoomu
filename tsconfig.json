@@ -2,9 +2,13 @@
   "include": ["**/src/**/*.ts", "**/src/**/*.vue"],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
+    "baseUrl": "./",
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "paths": {
+      "@koodo-fuoomu/*": ["packages/*/src/main.ts"]
+    }
   }
 }

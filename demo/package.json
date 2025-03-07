@@ -8,6 +8,6 @@
     "serve": "vite"
   },
   "dependencies": {
-    "koodo-fuoomu": "workspace:^"
+    "@koodo-fuoomu/form-designer": "workspace:^"
   }
 }
