@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import KfcFormDesigner from '@koodo-fuoomu/form-designer'
-import '@unocss/reset/tailwind.css'
+// import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
 
 import App from './App.vue'

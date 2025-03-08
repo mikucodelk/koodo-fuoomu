@@ -1,10 +1,14 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-const a = ref('hello world')
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <div class="m-4">
-    <kfc-form-designer :text="a"> </kfc-form-designer>
+  <div class="h-100vh">
+    <kfc-form-designer> </kfc-form-designer>
   </div>
 </template>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+</style>
