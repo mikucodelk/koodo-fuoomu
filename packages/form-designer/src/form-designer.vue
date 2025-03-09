@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { Icon } from '@iconify/vue'
+import { defineProps, ref } from 'vue'
 defineOptions({
   name: 'KfcFormDesigner'
 })
 defineProps({
   text: String
 })
+
+const activeMenu = ref('component')
+
+const menus = new Map([['component', 'component']])
 </script>
 
 <template>
@@ -19,8 +24,16 @@ defineProps({
     <main class="flex-auto flex justify-between">
       <aside class="flex-none w-300px flex">
         <ol class="w-38px bg-white mr-2px">
-          <li>组件</li>
-          <li>树</li>
+          <li
+            class="h-38px flex justify-center items-center cursor-pointer"
+            title="组件库"
+          >
+            <icon
+              icon="hugeicons:menu-square"
+              class="color-#666"
+              :class="{ '!color-#000': activeMenu === menus.get('component') }"
+            ></icon>
+          </li>
         </ol>
         <section class="w-260px bg-white"></section>
       </aside>
