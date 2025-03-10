@@ -6,5 +6,8 @@
   "main": "./dist/kfc-form-designer.js",
   "scripts": {
     "build": "vite build"
+  },
+  "dependencies": {
+    "vue-draggable-plus": "^0.6.0"
   }
 }
