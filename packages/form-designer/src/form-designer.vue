@@ -32,6 +32,7 @@ const onClone = res => {
   console.log(res)
 }
 const designerList = ref([])
+const activeComponent = ref('')
 </script>
 
 <template>
@@ -82,20 +83,32 @@ const designerList = ref([])
           </main>
         </section>
       </aside>
-      <article class="flex-auto bg-white m-16px">
+      <article
+        class="box-border relative flex-auto bg-white m-16px"
+        @click="activeComponent = 'form'"
+      >
         <vue-draggable
-          class="h-full"
+          class="box-border h-full"
+          :class="{ 'border-#000 border-solid border-2px': activeComponent === 'form' }"
           v-model="designerList"
           :animation="150"
           group="component"
         >
-          <section
-            v-for="(item, index) in designerList"
-            :key="index"
-          >
-            <component :is="item.value"></component>
-          </section>
+          <article @click.stop>
+            <section
+              v-for="(item, index) in designerList"
+              :key="index"
+            >
+              <component :is="item.value"></component>
+            </section>
+          </article>
         </vue-draggable>
+        <aside
+          v-if="activeComponent === 'form'"
+          class="absolute right-0 bottom-3 px-8px py-4px bg-#000 color-white text-12px"
+        >
+          表单
+        </aside>
       </article>
       <aside class="flex-none bg-white w-300px">
         <header></header>
