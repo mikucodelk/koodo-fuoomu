@@ -6,5 +6,8 @@ export default defineConfig({
     presetIcons(),
     presetWind3()
     // ...自定义 presets
-  ]
+  ],
+  shortcuts: {
+    ghost: 'box-border w-full h-2px bg-#000 overflow-hidden !border-none !py-0 my-1px'
+  }
 })
