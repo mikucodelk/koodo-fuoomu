@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { VueDraggable } from 'vue-draggable-plus'
 import { Icon } from '@iconify/vue'
-import { defineProps, ref } from 'vue'
+import { defineProps, ref, provide, nextTick } from 'vue'
+import formDesignerWrap from './components/form-designer-wrap/form-designer-wrap.vue'
+import type { Component } from 'vue'
 defineOptions({
   name: 'KfcFormDesigner'
 })
-defineProps({
-  text: String
-})
+defineProps<{
+  rootComponent: Component
+}>()
 
 const activeMenu = ref('component')
 
 const menus = new Map([['component', 'component']])
+
 const components = ref([
   {
     title: '基本组件',
@@ -29,10 +32,21 @@ const components = ref([
   }
 ])
 const onClone = res => {
-  console.log(res)
+  return {
+    name: res.label,
+    component: res.value,
+    children: []
+  }
 }
 const designerList = ref([])
-const activeComponent = ref('')
+const activeId = ref('')
+const updateActiveId = id => {
+  activeId.value = id
+}
+provide('activeId', { activeId, updateActiveId })
+nextTick(() => {
+  activeId.value = ''
+})
 </script>
 
 <template>
@@ -67,7 +81,7 @@ const activeComponent = ref('')
               :animation="150"
               :group="{ name: 'component', pull: 'clone', put: false }"
               :sort="false"
-              @clone="onClone"
+              :clone="onClone"
             >
               <h2 class="text-16px mb-8px font-bold">{{ item.title }}</h2>
               <article class="component-list grid grid-cols-2 gap-12px mb-8px text-14px">
@@ -83,32 +97,13 @@ const activeComponent = ref('')
           </main>
         </section>
       </aside>
-      <article
-        class="box-border relative flex-auto bg-white m-16px"
-        @click="activeComponent = 'form'"
-      >
-        <vue-draggable
-          class="box-border h-full"
-          :class="{ 'border-#000 border-solid border-2px': activeComponent === 'form' }"
+      <article class="box-border relative flex-auto bg-white m-16px">
+        <form-designer-wrap
+          class="h-full"
           v-model="designerList"
-          :animation="150"
-          group="component"
-        >
-          <article @click.stop>
-            <section
-              v-for="(item, index) in designerList"
-              :key="index"
-            >
-              <component :is="item.value"></component>
-            </section>
-          </article>
-        </vue-draggable>
-        <aside
-          v-if="activeComponent === 'form'"
-          class="absolute right-0 bottom-3 px-8px py-4px bg-#000 color-white text-12px"
-        >
-          表单
-        </aside>
+          name="表单"
+          :component="rootComponent"
+        />
       </article>
       <aside class="flex-none bg-white w-300px">
         <header></header>

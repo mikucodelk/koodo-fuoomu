@@ -8,6 +8,6 @@ export default defineConfig({
     // ...自定义 presets
   ],
   shortcuts: {
-    ghost: 'box-border w-full h-2px bg-#000 overflow-hidden !border-none !py-0 my-1px'
+    ghost: 'box-border w-full h-2px bg-#000 !overflow-hidden !border-none !pb-0 !pt-2px my-1px'
   }
 })
