@@ -1,0 +1,6 @@
+{
+  "name": "@koodo-fuoomu/element-plus",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/kfc-element-plus.js"
+}
