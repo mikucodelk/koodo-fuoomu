@@ -40,33 +40,36 @@ const list = computed<propsType[]>({
 
 <template>
   <section
-    class="pos-relative border-#fff border-solid border-2px"
+    class="box-border pos-relative border-#fff border-solid border-2px p-2px"
     :class="{ '!border-#000': isActive }"
     @click.stop="updateActive"
   >
-    <component :is="component">
-      <section class="h-full">
-        <vue-draggable
-          class="box-border h-full"
-          v-model="list"
-          :animation="150"
-          group="component"
-          ghostClass="ghost"
-        >
-          <form-designer-wrap
-            v-for="(item, index) in list"
-            :key="index"
-            v-model="item.children"
-            v-bind="item"
-          />
-        </vue-draggable>
-      </section>
-    </component>
-    <aside
-      v-if="isActive"
-      class="absolute right-3px bottom-3px px-8px py-4px bg-#000 color-white text-12px"
+    <component
+      :is="component"
+      class="h-full box-border"
     >
-      {{ name }}
-    </aside>
+      <vue-draggable
+        class="box-border h-full"
+        v-model="list"
+        :animation="150"
+        group="component"
+        ghostClass="ghost"
+      >
+        <form-designer-wrap
+          v-for="(item, index) in list"
+          :key="index"
+          v-model="item.children"
+          v-bind="item"
+        />
+      </vue-draggable>
+    </component>
+    <footer class="flex justify-between mt-2px">
+      <ul class="list-none">
+        <li class="px-8px py-2px bg-#fff color-white text-12px"></li>
+      </ul>
+      <ul class="list-none">
+        <li class="px-8px py-2px bg-#000 color-white text-12px">{{ name }}</li>
+      </ul>
+    </footer>
   </section>
 </template>
