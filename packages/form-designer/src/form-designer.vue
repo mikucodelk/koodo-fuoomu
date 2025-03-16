@@ -7,34 +7,29 @@ import type { Component } from 'vue'
 defineOptions({
   name: 'KfcFormDesigner'
 })
+type listType = {
+  name: string
+  component: Component | string
+}
+
+type ComponentItem = {
+  title: string
+  list: listType[]
+}
 defineProps<{
   rootComponent: Component
+  rootName: string
+  components: ComponentItem[]
 }>()
 
 const activeMenu = ref('component')
 
 const menus = new Map([['component', 'component']])
 
-const components = ref([
-  {
-    title: '基本组件',
-    components: [
-      { label: '文本框', value: 'span' },
-      { label: '主要内容', value: 'strong' }
-    ]
-  },
-  {
-    title: '表单组件',
-    components: [
-      { label: '输入框', value: 'el-input' },
-      { label: '多行文本', value: 'textarea' }
-    ]
-  }
-])
 const onClone = res => {
   return {
-    name: res.label,
-    component: res.value,
+    name: res.name,
+    component: res.component,
     children: []
   }
 }
@@ -76,7 +71,7 @@ nextTick(() => {
             <vue-draggable
               v-for="item in components"
               :key="item.title"
-              v-model="item.components"
+              v-model="item.list"
               target=".component-list"
               :animation="150"
               :group="{ name: 'component', pull: 'clone', put: false }"
@@ -86,11 +81,11 @@ nextTick(() => {
               <h2 class="text-16px mb-8px font-bold">{{ item.title }}</h2>
               <article class="component-list grid grid-cols-2 gap-12px mb-8px text-14px">
                 <section
-                  v-for="component in item.components"
+                  v-for="(component, index) in item.list"
                   class="component-item cursor-pointer list-none py-4px text-center border border-#666 border-solid rounded-4px"
-                  :key="component.value"
+                  :key="index"
                 >
-                  {{ component.label }}
+                  {{ component.name }}
                 </section>
               </article>
             </vue-draggable>
@@ -101,7 +96,7 @@ nextTick(() => {
         <form-designer-wrap
           class="h-full"
           v-model="designerList"
-          name="表单"
+          :name="rootName"
           :component="rootComponent"
         />
       </article>

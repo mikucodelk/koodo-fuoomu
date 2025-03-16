@@ -32,7 +32,6 @@ const list = computed<propsType[]>({
     return props.modelValue
   },
   set: value => {
-    console.log(value)
     emits('update:modelValue', value)
   }
 })
@@ -40,34 +39,42 @@ const list = computed<propsType[]>({
 
 <template>
   <section
-    class="box-border pos-relative border-#fff border-solid border-2px p-2px"
+    class="box-border pos-relative border-#fff border-solid border-2px p-2px flex flex-col"
     :class="{ '!border-#000': isActive }"
     @click.stop="updateActive"
   >
-    <component
-      :is="component"
-      class="h-full box-border"
-    >
-      <vue-draggable
-        class="box-border h-full"
-        v-model="list"
-        :animation="150"
-        group="component"
-        ghostClass="ghost"
+    <article class="flex-auto">
+      <component
+        :is="component"
+        class="h-full box-border"
       >
-        <form-designer-wrap
-          v-for="(item, index) in list"
-          :key="index"
-          v-model="item.children"
-          v-bind="item"
-        />
-      </vue-draggable>
-    </component>
-    <footer class="flex justify-between mt-2px">
-      <ul class="list-none">
+        <vue-draggable
+          class="box-border h-full"
+          v-model="list"
+          :animation="150"
+          group="component"
+          ghostClass="ghost"
+        >
+          <form-designer-wrap
+            v-for="(item, index) in list"
+            :key="index"
+            v-model="item.children"
+            v-bind="item"
+          />
+        </vue-draggable>
+      </component>
+    </article>
+    <footer class="flex justify-between mt-2px h-20px">
+      <ul
+        class="list-none"
+        v-if="isActive"
+      >
         <li class="px-8px py-2px bg-#fff color-white text-12px"></li>
       </ul>
-      <ul class="list-none">
+      <ul
+        class="list-none"
+        v-if="isActive"
+      >
         <li class="px-8px py-2px bg-#000 color-white text-12px">{{ name }}</li>
       </ul>
     </footer>

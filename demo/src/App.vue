@@ -1,11 +1,22 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { KfcForm } from '@koodo-fuoomu/element-plus'
-console.log(KfcForm)
+const components = ref([
+  {
+    title: '基本组件',
+    list: [{ name: '输入框', component: 'el-input' }]
+  }
+])
 </script>
 
 <template>
   <div class="h-100vh">
-    <kfc-form-designer :root-component="KfcForm"> </kfc-form-designer>
+    <kfc-form-designer
+      root-name="表单"
+      :root-component="KfcForm"
+      :components="components"
+    >
+    </kfc-form-designer>
   </div>
 </template>
 
