@@ -3,6 +3,7 @@ import { defineProps, defineEmits, computed, useId, inject } from 'vue'
 import type { Component, Ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 type propsType = {
+  id: string
   name: string
   component: Component | string
   children?: propsType[]
@@ -56,8 +57,8 @@ const list = computed<propsType[]>({
           ghostClass="ghost"
         >
           <form-designer-wrap
-            v-for="(item, index) in list"
-            :key="index"
+            v-for="item in list"
+            :key="item.id"
             v-model="item.children"
             v-bind="item"
           />

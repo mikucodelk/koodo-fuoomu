@@ -4,6 +4,8 @@ import { Icon } from '@iconify/vue'
 import { defineProps, ref, provide, nextTick } from 'vue'
 import formDesignerWrap from './components/form-designer-wrap/form-designer-wrap.vue'
 import type { Component } from 'vue'
+import { v4 as uuidv4 } from 'uuid'
+
 defineOptions({
   name: 'KfcFormDesigner'
 })
@@ -28,6 +30,7 @@ const menus = new Map([['component', 'component']])
 
 const onClone = res => {
   return {
+    id: uuidv4(),
     name: res.name,
     component: res.component,
     children: []

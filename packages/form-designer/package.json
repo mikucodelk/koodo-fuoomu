@@ -8,6 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "uuid": "^11.1.0",
     "vue-draggable-plus": "^0.6.0"
   }
 }
