@@ -23,7 +23,7 @@ defineProps<{
   rootName: string
   components: ComponentItem[]
 }>()
-
+const id = ref(uuidv4())
 const activeMenu = ref('component')
 
 const menus = new Map([['component', 'component']])
@@ -33,7 +33,7 @@ const onClone = res => {
     id: uuidv4(),
     name: res.name,
     component: res.component,
-    children: []
+    children: res?.children?.map?.(v => ({ ...v, id: uuidv4() })) || []
   }
 }
 const designerList = ref([])
@@ -98,6 +98,8 @@ nextTick(() => {
       <article class="box-border relative flex-auto bg-white m-16px">
         <form-designer-wrap
           class="h-full"
+          dragger
+          :id="id"
           v-model="designerList"
           :name="rootName"
           :component="rootComponent"
