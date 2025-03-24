@@ -5,7 +5,7 @@ defineOptions({
 </script>
 
 <template>
-  <el-row class="min-h-100px">
+  <el-row>
     <slot></slot>
   </el-row>
 </template>

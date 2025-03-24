@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { KfcForm, KfcRow, KfcCol } from '@koodo-fuoomu/element-plus'
+import { KfcForm, KfcRow, KfcCol, KfcInput } from '@koodo-fuoomu/element-plus'
 const components = ref([
   {
     title: '布局组件',
@@ -17,7 +17,7 @@ const components = ref([
   },
   {
     title: '基本组件',
-    list: [{ name: '输入框', component: 'el-input' }]
+    list: [{ name: '输入框', component: KfcInput }]
   }
 ])
 </script>

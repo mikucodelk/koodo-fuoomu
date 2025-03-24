@@ -7,7 +7,8 @@ defineOptions({
 <template>
   <el-col
     :span="12"
-    class="h-200px"
+    v-bind="$attrs"
+    class="min-h-52px"
   >
     <slot></slot>
   </el-col>
