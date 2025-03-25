@@ -5,7 +5,9 @@ defineOptions({
 </script>
 
 <template>
-  <el-row>
-    <slot></slot>
-  </el-row>
+  <section>
+    <el-row>
+      <slot></slot>
+    </el-row>
+  </section>
 </template>

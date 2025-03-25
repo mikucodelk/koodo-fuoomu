@@ -29,7 +29,6 @@ const isActive = computed(() => activeId.value === props.id)
 const updateActive = () => {
   updateActiveId(props.id)
 }
-updateActive()
 const list = computed<propsType[]>({
   get: () => {
     return props.modelValue || []
@@ -38,6 +37,9 @@ const list = computed<propsType[]>({
     emits('update:modelValue', value)
   }
 })
+const onClone = (res: unknown) => {
+  return res
+}
 </script>
 
 <template>
@@ -68,8 +70,9 @@ const list = computed<propsType[]>({
         :animation="150"
         group="component"
         ghostClass="ghost"
+        :emptyInsertThreshold="0"
+        :clone="onClone"
       >
-        <div></div>
         <form-designer-wrap
           v-for="item in list"
           :key="item.id"

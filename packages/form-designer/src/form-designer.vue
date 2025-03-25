@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VueDraggable } from 'vue-draggable-plus'
 import { Icon } from '@iconify/vue'
-import { defineProps, ref, provide, nextTick } from 'vue'
+import { defineProps, ref, provide } from 'vue'
 import formDesignerWrap from './components/form-designer-wrap/form-designer-wrap.vue'
 import type { Component } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
@@ -29,8 +29,10 @@ const activeMenu = ref('component')
 const menus = new Map([['component', 'component']])
 
 const onClone = res => {
+  const id = uuidv4()
+  activeId.value = id
   return {
-    id: uuidv4(),
+    id,
     name: res.name,
     component: res.component,
     children: res?.children?.map?.(v => ({ ...v, id: uuidv4() })) || []
@@ -42,9 +44,6 @@ const updateActiveId = id => {
   activeId.value = id
 }
 provide('activeId', { activeId, updateActiveId })
-nextTick(() => {
-  activeId.value = ''
-})
 </script>
 
 <template>
@@ -55,7 +54,7 @@ nextTick(() => {
         <slot name="toolbar"></slot>
       </section>
     </header>
-    <main class="flex-auto flex justify-between">
+    <main class="flex-1 flex justify-between overflow-hidden">
       <aside class="flex-none w-300px flex">
         <ol class="w-38px bg-white mr-2px">
           <li
@@ -75,8 +74,8 @@ nextTick(() => {
               v-for="item in components"
               :key="item.title"
               v-model="item.list"
+              :emptyInsertThreshold="0"
               target=".component-list"
-              :animation="150"
               :group="{ name: 'component', pull: 'clone', put: false }"
               :sort="false"
               :clone="onClone"
@@ -95,15 +94,17 @@ nextTick(() => {
           </main>
         </section>
       </aside>
-      <article class="box-border relative flex-auto bg-white m-16px">
-        <form-designer-wrap
-          class="h-full"
-          dragger
-          :id="id"
-          v-model="designerList"
-          :name="rootName"
-          :component="rootComponent"
-        />
+      <article class="box-border relative flex-auto p-16px overflow-y-auto overflow-x-hidden">
+        <main class="bg-white h-full">
+          <form-designer-wrap
+            class="h-full !mb-0"
+            dragger
+            :id="id"
+            v-model="designerList"
+            :name="rootName"
+            :component="rootComponent"
+          />
+        </main>
       </article>
       <aside class="flex-none bg-white w-300px">
         <header></header>
